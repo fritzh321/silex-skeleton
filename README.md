@@ -31,10 +31,6 @@ Install vendors:
 
     php composer.phar install
 
-You need point the document root of your virtual host to /path_to/admingenerator/web
-    
-You can customize the url using the .htaccess file, maybe this will help you:
-[http://stackoverflow.com/questions/24952846/how-do-i-remove-the-web-from-my-url/24953439#24953439](http://stackoverflow.com/questions/24952846/how-do-i-remove-the-web-from-my-url/24953439#24953439)
 
 
 Generate CRUD backend
@@ -79,7 +75,7 @@ The command generates one menu section for each database table.
 
 Author
 ------
-This GIT is forked from 
+This GIT is based on
 * Jon Segador <info@jonsegador.com>
 * CRUD Admin Generator webpage: [http://crud-admin-generator.com](http://crud-admin-generator.com)
 
