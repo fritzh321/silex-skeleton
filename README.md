@@ -1,17 +1,17 @@
-<<<<<<< HEAD
-CRUD Admin Generator
+Silex Skeleton
 ===================
 
-What is CRUD Admin Generator?
+What is Silex Skeleton
 -----------------------------
 
-**CRUD Admin Generator** ([http://crud-admin-generator.com][1]) is a tool to **generate a complete backend from a MySql database** where you can create, read, update and delete records in a database. 
+Silex Skeleton is a tool to **generate a complete backend from a MySql database** (based on schemamanager) where you can create, read, update and delete records in a database. 
 
 **The backend is generated in seconds** without configuration files where there is a lot of *"magic"* and is very difficult to adapt to your needs. 
 
-**The generated code is fully customizable and extensible.**
+Login System included
 
 It has been programmed with the Silex framework, so the resulting code is PHP.
+
 
 
 Installation
@@ -19,9 +19,9 @@ Installation
 
 Clone the repository
 
-    git clone https://github.com/jonseg/crud-admin-generator.git admingenerator
+    git clone hhttps://github.com/FritzH321/silex-skeleton.git silex-skeleton
 
-    cd admingenerator
+    cd silex-skeleton
 
 Download composer:
 
@@ -32,24 +32,6 @@ Install vendors:
     php composer.phar install
 
 You need point the document root of your virtual host to /path_to/admingenerator/web
-
-This is an example of VirtualHost:
-
-    <VirtualHost *:80>
-        DocumentRoot /path_to/admingenerator/web
-        DirectoryIndex index.php
-        <Directory "/path_to/admingenerator/web">
-            Options Indexes FollowSymLinks
-            Order Allow,Deny
-            Allow from all
-            AllowOverride all
-            <IfModule mod_php5.c>
-                php_admin_flag engine on
-                php_admin_flag safe_mode off
-                php_admin_value open_basedir none
-            </ifModule>
-        </Directory>
-    </VirtualHost>
     
 You can customize the url using the .htaccess file, maybe this will help you:
 [http://stackoverflow.com/questions/24952846/how-do-i-remove-the-web-from-my-url/24953439#24953439](http://stackoverflow.com/questions/24952846/how-do-i-remove-the-web-from-my-url/24953439#24953439)
@@ -92,43 +74,15 @@ Now, execute the command that will generate the CRUD backend:
 **This is it!** Now access with your favorite web browser.
 
 
-The command generates one menu section for each database table. **Now will be much easier to list, create, edit and delete rows!**
+The command generates one menu section for each database table. 
 
-
-Customize the result
---------------------
-
-The generated code is fully configurable and editable, you just have to edit the corresponding files.
-
- - The **controller** you can find it in **/web/controllers/TABLE_NAME/index.php**
- - The **views** are in **/web/views/TABLE_NAME**
-
-It has generated a folder for each database table.
-
-
-Contributing
-------------
-
-If you want to contribute code to CRUD Admin Generator, we are waiting for your pull requests!
-
-Some suggestions for improvement could be:
-
- - Different form fields depending on data type.: datetime, time...
- - Create admin user with a login and logout page.
- - Generate CRUD for tables with more than one primary key.
- - Any other useful functionality!
 
 Author
 ------
-
+This GIT is forked from 
 * Jon Segador <info@jonsegador.com>
-* Personal site: [http://jonsegador.com/](http://jonsegador.com/)
-* Twitter: *[@jonseg](https://twitter.com/jonseg)*
 * CRUD Admin Generator webpage: [http://crud-admin-generator.com](http://crud-admin-generator.com)
 
+Modified by:
+* Fritz Hoste <hoste.fritz@gmail.com>
 
-  [1]: http://crud-admin-generator.com
-=======
-silex-skeleton
-==============
->>>>>>> 44348b491c476118e51b5a1a6573b1d526840bcd
