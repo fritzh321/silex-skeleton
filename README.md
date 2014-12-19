@@ -52,6 +52,20 @@ Edit the file /path_to/admingenerator/src/app.php and set your database conectio
     ));
 
 
+Execute this SQL in your database
+
+        CREATE TABLE IF NOT EXISTS `t_users` (
+              `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+              `username` varchar(255) NOT NULL DEFAULT '',
+              `password` varchar(255) NOT NULL DEFAULT '',
+              `first_name` varchar(255) NOT NULL,
+              `last_name` varchar(255) NOT NULL,
+              `enabled` int(1) NOT NULL DEFAULT '0',
+              `roles` varchar(255) NOT NULL DEFAULT '',
+              PRIMARY KEY (`id`),
+              UNIQUE KEY `unique_username` (`username`)
+        ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+
 You need to set the url of the resources folder.
 
 Change this line:
