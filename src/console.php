@@ -15,8 +15,41 @@ $console
     ->setDescription("Generate administrator")
     ->setCode(function (InputInterface $input, OutputInterface $output) use ($app) {
 
-	    /** @var Doctrine\DBAL\Schema\AbstractSchemaManager $sm */
-	    $sm = $app['db']->getSchemaManager();
+
+    	$sm = $app['db']->getSchemaManager();
+
+    	if (!$sm->tablesExist('t_users')) {
+    		$users = new Table('t_users');
+    		$users->addColumn('id', 'integer', array('unsigned' => true, 'autoincrement' => true));
+    		$users->setPrimaryKey(array('id'));
+    		$users->addColumn('username', 'string', array('length' => 32));
+    		$users->addUniqueIndex(array('username'));
+    		$users->addColumn('password', 'string', array('length' => 255));
+    		$users->addColumn('first_name', 'string', array('length' => 255));
+    		$users->addColumn('last_name', 'string', array('length' => 255));
+    		$users->addColumn('enabled', 'integer', array('length' => 1));
+    		$users->addColumn('roles', 'string', array('length' => 255));
+
+    		$sm->createTable($users);
+
+    		$app['db']->insert('t_users', array(
+    			'username' => 'fritz',
+    			'password' => '5FZ2Z8QIkA7UTZ4BYkoC+GsReLf569mSKDsfods6LYQ8t+a8EW9oaircfMpmaLbPBh4FOBiiFyLfuZmTSUwzZg==',
+    			'first_name' => 'Fritz',
+    			'last_name' => 'Hoste',
+    			'enabled' => 1,
+    			'roles' => 'ROLE_USER'
+    			));
+
+    		$app['db']->insert('t_users', array(
+    			'username' => 'admin',
+    			'password' => '5FZ2Z8QIkA7UTZ4BYkoC+GsReLf569mSKDsfods6LYQ8t+a8EW9oaircfMpmaLbPBh4FOBiiFyLfuZmTSUwzZg==',
+    			'first_name' => 'Fritz',
+    			'last_name' => 'Hoste',
+    			'enabled' => 1,
+    			'roles' => 'ROLE_ADMIN'
+    			));
+    	}
 
 	    $dbTables = $sm->listTables();
 	    $_dbTables = $sm->listTableNames();

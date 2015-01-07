@@ -1,5 +1,8 @@
 {% extends 'ag_base/backend.html.twig' %}
 
+{% block body_params %}class="skin-black"{% endblock %}
+
+
 {% block javascripts %}
 
     {{ parent() }}
@@ -7,24 +10,7 @@
     <!-- page script -->
     <script type="text/javascript">
         $(function() {
-            $("#__TABLENAME___list").dataTable({
-				serverSide: true,
-				ajax: '__TABLENAME__/list',
-				columns: [
-					{% for table_column in table_columns %}
-					{ "data": "{{ table_column }}"},
-                    {% endfor %}
-					{
-						"orderable": false,
-						"data": null,
-						"defaultContent": null,
-					}
-				],
-				rowCallback: function( row, data ) {
-					var actions = '<a href="__TABLENAME__/edit/' + data.{{primary_key}} + '" class="btn btn-primary btn-xs">Edit</a> <a href="__TABLENAME__/delete/' + data.{{primary_key}} + '" onclick="return confirm_delete();" class="btn btn-danger btn-xs">Delete</a>';
-					$('td:eq({{ table_columns|length }})', row).html( actions );
-				}
-			});
+            $("#__TABLENAME___list").dataTable();
         });
 
         function confirm_delete(){
@@ -75,6 +61,17 @@
                                             <th>Actions</th>
                                         </tr>
                                     </thead>
+                                    <tbody>
+                                        {% for row in rows %}
+                                            <tr>
+                                                {% for table_column in table_columns %}
+                                                    <td>{{ row[table_column] }}</td>
+                                                {% endfor %}
+                                                <td><a href="{{ path('__TABLENAME___edit', { id: row[primary_key] }) }}" class="btn btn-primary btn-xs">Edit</a> <a href="{{ path('__TABLENAME___delete', { id: row[primary_key] }) }}" onclick='return confirm_delete();' class="btn btn-danger btn-xs">Delete</a></td>
+                                            </tr>
+                                        {% endfor %}                                        
+
+                                    </tbody>
                                     <tfoot>
                                         <tr>
                                             {% for table_column in table_columns %}

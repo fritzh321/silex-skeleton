@@ -58,21 +58,7 @@
             background-color: darken(@yellow, 5%);
         }
     }
-    //Button size variations 
-    &.btn-sm {
-        font-size: 12px;
-    }
-    &.btn-lg {
-        padding: 10px 16px;
-    }
-    &.btn-block {
-        font-size: 15px;
-        padding: 10px;
-        &.btn-sm {
-            font-size: 13px;
-            padding: 7px;
-        }
-    }
+    
     // Flat buttons 
     &.btn-flat {
         .border-radius(0);
@@ -96,17 +82,21 @@
     // input file btn 
     &.btn-file {
         position: relative;
-        width: 120px;
-        height: 35px;
         overflow: hidden;
         > input[type='file'] {
-            display: block !important;
-            width: 100% !important;
-            height: 35px !important;
-            opacity: 0 !important;
             position: absolute;
-            top: -10px;
-            cursor: pointer;
+            top: 0;
+            right: 0;
+            min-width: 100%;
+            min-height: 100%;
+            font-size: 100px;
+            text-align: right;
+            filter: alpha(opacity=0);
+            opacity: 0;
+            outline: none;
+            background: white;
+            cursor: inherit;
+            display: block;
         }
     }
 
@@ -155,7 +145,7 @@
     }
 
     //Social buttons
-    &.btn-social {
+    &.btn-social-old {
         -webkit-box-shadow: none;
         -moz-box-shadow: none;
         box-shadow: none;

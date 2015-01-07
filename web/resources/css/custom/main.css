@@ -1,0 +1,44 @@
+@import url(http://fonts.googleapis.com/css?family=Oswald:400);
+body, html, .content {
+	background: #F5F5F5;
+}
+body > .header .logo {
+	font-family: 'Oswald', sans-serif;
+	font-weight: 400;
+	text-transform: uppercase;
+}
+
+.skin-black .logo {
+	background-color: #272B35;
+	border-bottom: 1px solid #232730;
+}
+
+.skin-black .left-side {
+background: #2B303B;
+}
+
+
+
+.skin-black .sidebar > .sidebar-menu > li {
+	border: none !important;
+}
+
+.skin-black .sidebar > .sidebar-menu > li > a:hover, .skin-black .sidebar > .sidebar-menu > li.active > a {
+	background:#21252D;
+}
+
+
+.skin-black .sidebar > .sidebar-menu > li:first-of-type > a {
+	border-color: #21252D;
+}
+.skin-black .sidebar > .sidebar-menu > li {
+	
+	border-bottom-color:#21252D !important;
+}
+
+.skin-black .sidebar > .sidebar-menu > li > .treeview-menu {
+	background:#21252D;
+}
+.skin-black .sidebar {
+border-bottom: 1px solid #2B303B;
+}

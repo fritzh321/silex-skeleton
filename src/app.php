@@ -1,14 +1,5 @@
 <?php
 
-/*
- * This file is part of the CRUD Admin Generator project.
- *
- * Author: Jon Segador <jonseg@gmail.com>
- * Web: http://crud-admin-generator.com
- *
- * For the full copyright and license information, please view the LICENSE
- * file that was distributed with this source code.
- */
 
 class queryData {
     public $start;
@@ -21,12 +12,14 @@ class queryData {
 }
  
 use Silex\Application;
+use Symfony\Component\HttpFoundation\Response; 
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
+
 
 $app = new Application();
 
-$app->register(new Silex\Provider\TwigServiceProvider(), array(
-    'twig.path' => __DIR__.'/../web/views',
-));
+
 $app->register(new Silex\Provider\FormServiceProvider());
 $app->register(new Silex\Provider\TranslationServiceProvider(), array(
     'translator.messages' => array(),
@@ -34,21 +27,54 @@ $app->register(new Silex\Provider\TranslationServiceProvider(), array(
 $app->register(new Silex\Provider\ValidatorServiceProvider());
 $app->register(new Silex\Provider\UrlGeneratorServiceProvider());
 $app->register(new Silex\Provider\SessionServiceProvider());
-$app->register(new Silex\Provider\DoctrineServiceProvider(), array(
 
-        'dbs.options' => array(
-            'db' => array(
-                'driver'   => 'pdo_mysql',
-                'dbname'   => 'DATABASE_NAME',
-                'host'     => '127.0.0.1',
-                'user'     => 'DATABASE_USER',
-                'password' => 'DATABASE_PASS',
-                'charset'  => 'utf8',
-            ),
-        )
+require_once 'dbconfig.php';
+require_once 'security.php';
+
+$app->register(new Silex\Provider\TwigServiceProvider(), array(
+    'twig.path' => __DIR__.'/../web/views',
 ));
 
-$app['asset_path'] = '/resources';
+
+$app->before(function (Symfony\Component\HttpFoundation\Request $request) use ($app) {
+    $token = $app['security']->getToken();
+    $app['user'] = null;
+
+    if ($token && !$app['security.trust_resolver']->isAnonymous($token)) {
+        $app['user'] = $token->getUser();
+    }
+});
+
+$app->before(function() use ($app) {
+    if ($app['request']->get('require_authentication')) {   
+        if (null === $user = $app['session']->get('user')) {
+            throw new AccessDeniedHttpException("require auth...");
+        }
+    }
+});
+
+$app->error(function (\Exception $e) use ($app) {
+    if ($e instanceof AccessDeniedHttpException) {
+        return $app->redirect('/accessdenied');
+    }
+});
+
+$app->error(function(\Exception $e) use ($app) {
+    if ($e instanceof NotFoundHttpException) {
+        return $app['twig']->render('not_found.html.twig', array(
+        "code" =>  $e->getStatusCode(),
+        "error" => Response::$statusTexts[$e->getStatusCode()],
+        "page" =>  $app['request']->getRequestUri()
+        ));
+    }
+});
+
+
+
+
+
+
+$app['asset_path'] = 'http://crud.dev/web/resources';
 $app['debug'] = true;
 
 return $app;

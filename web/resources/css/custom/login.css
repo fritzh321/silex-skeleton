@@ -1,0 +1,63 @@
+html, body {
+	height: 100%
+}
+.login-wrapper {
+	height: 100%;
+	background-color: #064288;
+}
+.logincont {
+	height: 100%;
+}
+.logonbox {
+	height: 100%;
+
+}
+.bgwhite {
+	background-color: white;
+}
+.logo {
+	width: 150px;
+	margin-bottom: 20px;
+}
+.loginform {
+	margin-top: 80px;
+}
+p.lead {
+	padding-bottom: 20px;
+	font-size: 16px;
+}
+.bg-oleon {
+	background-color: #064288 !important;
+	color:white !important;
+}
+.login-wrapper {
+	
+	background-image: url("../../silex/bg.jpg");
+	background-repeat: no-repeat;
+	background-size: contain;
+}
+.textinfo {
+	color: white;
+	position: absolute;
+	bottom: 10px;
+	left: 10px;
+}
+.textinfo h1 {
+	font-size: 31px;
+	line-height: 31px;
+}
+.textinfo h2 {
+
+}
+.icheckbox_square {
+	margin-right: 10px !important;
+}
+.footertext {
+	position: absolute;
+	bottom: 20px;
+	width: 60%;
+	margin-left: 20%;
+}
+label {
+	display: block;
+}
